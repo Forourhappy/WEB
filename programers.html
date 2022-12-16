@@ -9,21 +9,21 @@
 
 	<body>
 		<script>
+			const word = ['aya', 'ye', 'woo', 'ma'];
+			const babbling = ['aya', 'yee', 'u', 'maa', 'wyeoo'];
 
-			function solution(n) {
-
-			  let answer = '';
-
-			  function three(n) {
-			    if(n > 2) {
-			      three(Math.ceil(n/3))
-			    }
-			    return s +=
-			  }
-
-			    return answer;
+			function solution(babbling) {
+				for (let i = 0; i < babbling.length; i++) {
+					for (let j = 0; j < word.length; j++) {
+						while (babbling[i].includes(word[j])) {
+							babbling[i] = babbling[i].split(word[j]).join('');
+						}
+					}
+				}
+				return babbling.filter(i => i === '').length;
 			}
-			solution(45);
+
+			console.log(solution(babbling));
 		</script>
 	</body>
 </html>
