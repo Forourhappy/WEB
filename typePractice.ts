@@ -3,28 +3,54 @@ type Words = {
 };
 
 class Dict {
-	private word: Words;
+	private words: Words;
 	constructor() {
-		this.word = {};
+		this.words = {};
 	}
 
-	add(word: Words) {
-		if (this.word[word.term] === undefined) {
-			this.word[word.term] = word.def;
+	add(word: Word) {
+		if (this.words[word.term] === undefined) {
+			this.words[word.term] = word.def;
 		}
 	}
 
 	get(term: string) {
-		return this.word[term];
+		return this.words[term];
+	}
+
+	delete(term: string) {
+		delete this.words[term];
+	}
+
+	update(word: Word) {
+		if (this.words[word.term] !== undefined) {
+			this.words[word.term] = word.def;
+		}
+	}
+
+	showAll() {
+		for (let key in this.words) {
+			console.log(`${key}: ${this.words[key]}`);
+		}
+	}
+
+	count() {
+		return Object.keys(this.words).length;
 	}
 }
 
 class Word {
-	constructor(protected term: string, protected dec: string) {}
+	constructor(public term: string, public def: string) {}
 }
-
-const typescript = new Word('타입스크립트', '재밌다');
 
 const myDic = new Dict();
 
-console.log(myDic.get('타입스크립트'));
+myDic.add(new Word('typescript', 'fun'));
+myDic.add(new Word('javascript', 'good'));
+myDic.add(new Word('html', 'awesome'));
+myDic.add(new Word('css', 'wow'));
+
+myDic.delete('typescript');
+
+myDic.showAll();
+console.log(myDic.count());
